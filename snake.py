@@ -17,6 +17,9 @@ def randomColor():
     colors = ['violet', 'teal', 'gold', 'lime', 'yellow']
     return random.choice(colors)
 
+
+count = 0
+
 def change(x, y):
     "Change snake direction."
     aim.x = x
@@ -28,6 +31,7 @@ def inside(head):
 
 def move():
     "Move snake forward one segment."
+    global count
     head = snake[-1].copy()
     head.move(aim)
 
@@ -37,14 +41,27 @@ def move():
         return
 
     snake.append(head)
-
+    
+    
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
     else:
-        snake.pop(0)
+        
 
+        snake.pop(0)
+    count += 1
+    if count % 4 == 0: 
+        food.x += randrange(-1, 1) * 10
+        food.y += randrange(-1, 1) * 10
+
+        # Move the food each time the snake moves. 
+        if food.x < -190: food.x = -190
+        if food.x > 180: food.x = 180
+        if food.y < -190: food.y = -190
+        if food.y > 180: food.y = 180
+    
     clear()
 
     for body in snake:
