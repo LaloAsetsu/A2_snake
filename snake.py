@@ -1,10 +1,21 @@
+"Activity 2 of Git, a snake game in Python"
+"Autors: Eduardo Antonio Mora Hernandez & Emmiliano"
+"Date: 20/03/2025"
+
+
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random
 
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+
+def randomColor():
+    "Generate random color"
+    colors = ['violet', 'teal', 'gold', 'lime', 'yellow']
+    return random.choice(colors)
 
 def change(x, y):
     "Change snake direction."
@@ -21,7 +32,7 @@ def move():
     head.move(aim)
 
     if not inside(head) or head in snake:
-        square(head.x, head.y, 9, 'red')
+        square(head.x, head.y, 9, randomColor())
         update()
         return
 
@@ -37,9 +48,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, randomColor())
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, randomColor())
     update()
     ontimer(move, 100)
 
